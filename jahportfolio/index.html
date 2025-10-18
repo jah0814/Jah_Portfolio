@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>James Hernandez | Cybersecurity Specialist</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", "JetBrains Mono", monospace;
+    transition: background-color 0.3s, color 0.3s, transform 0.3s;
+  }
+
+  :root {
+    --bg-primary: #0a0a0a;
+    --bg-secondary: #1a1a1a;
+    --bg-tertiary: #2a2a2a;
+    --bg-card: rgba(255, 255, 255, 0.05);
+    --text-primary: #ffffff;
+    --text-secondary: #b0b0b0;
+    --accent: #00ff88;
+    --accent-hover: #00cc6d;
+    --danger: #ff4444;
+    --warning: #ffaa00;
+    --success: #00ff88;
+    --shadow: rgba(0, 255, 136, 0.1);
+    --header-bg: rgba(10, 10, 10, 0.95);
+    --glass: rgba(255, 255, 255, 0.1);
+    --grid-color: rgba(0, 255, 136, 0.05);
+  }
+
+  .light-mode {
+    --bg-primary: #f8f9fa;
+    --bg-secondary: #e9ecef;
+    --bg-tertiary: #dee2e6;
+    --bg-card: rgba(0, 0, 0, 0.05);
+    --text-primary: #212529;
+    --text-secondary: #495057;
+    --accent: #0077ff;
+    --accent-hover: #0066cc;
+    --danger: #dc3545;
+    --warning: #ffc107;
+    --success: #28a745;
+    --shadow: rgba(0, 119, 255, 0.1);
+    --header-bg: rgba(248, 249, 250, 0.95);
+    --glass: rgba(0, 0, 0, 0.1);
+    --grid-color: rgba(0, 119, 255, 0.05);
+  }
+
+  body {
+    background: 
+      radial-gradient(circle at 10% 20%, var(--bg-secondary) 0%, transparent 20%),
+      radial-gradient(circle at 90% 80%, var(--bg-tertiary) 0%, transparent 20%),
+      linear-gradient(135deg, var(--bg-primary), var(--bg-secondary));
+    color: var(--text-primary);
+    scroll-behavior: smooth;
+    line-height: 1.6;
+    overflow-x: hidden;
+    min-height: 100vh;
+    position: relative;
+  }
+
+  .grid-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+      linear-gradient(var(--grid-color) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+    background-size: 50px 50px;
+    z-index: -2;
+    opacity: 0.3;
+  }
+
+  header {
+    background: var(--header-bg);
+    backdrop-filter: blur(20px);
+    padding: 15px 20px;
+    box-shadow: 0 4px 30px var(--shadow);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid var(--glass);
+  }
+
+  .header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .profile-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .profile-pic {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--accent);
+    box-shadow: 0 0 25px var(--accent);
+    transition: all 0.5s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .profile-pic::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+      to bottom right,
+      rgba(0, 255, 136, 0) 0%,
+      rgba(0, 255, 136, 0.1) 50%,
+      rgba(0, 255, 136, 0) 100%
+    );
+    transform: rotate(30deg);
+    transition: all 0.5s ease;
+  }
+
+  .profile-pic:hover {
+    transform: scale(1.05) rotate(2deg);
+    box-shadow: 0 0 35px var(--accent);
+  }
+
+  .header-text h1 {
+    font-size: 1.8rem;
+    color: var(--accent);
+    margin-bottom: 5px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+  }
+
+  .header-text p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    font-weight: 300;
+    position: relative;
+    display: inline-block;
+  }
+
+  .header-text p::after {
+    content: '🛡️';
+    margin-left: 8px;
+    animation: pulse 2s infinite;
+  }
+
+  nav {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+  }
+
+  nav a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s;
+    position: relative;
+    font-size: 0.95rem;
+    padding: 5px 0;
+  }
+
+  nav a:hover {
+    color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(90deg, var(--accent), transparent);
+    transition: width 0.3s ease;
+  }
+
+  nav a:hover::after {
+    width: 100%;
+  }
+
+  .theme-toggle {
+    background: var(--glass);
+    border: 1px solid var(--glass);
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 50%;
+    transition: all 0.3s;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .theme-toggle:hover {
+    color: var(--accent);
+    background: var(--bg-card);
+    transform: rotate(15deg);
+    box-shadow: 0 5px 15px var(--shadow);
+  }
+
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    padding: 100px 20px;
+  }
+
+  .hero-content {
+    max-width: 800px;
+    z-index: 2;
+  }
+
+  .hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, var(--accent), var(--success));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .hero p {
+    font-size: 1.3rem;
+    color: var(--text-secondary);
+    margin-bottom: 30px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .cta-button {
+    display: inline-block;
+    padding: 15px 35px;
+    background: linear-gradient(135deg, var(--accent), var(--success));
+    color: var(--bg-primary);
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s;
+    box-shadow: 0 10px 30px var(--shadow);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.5s;
+  }
+
+  .cta-button:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px var(--shadow);
+  }
+
+  .cta-button:hover::before {
+    left: 100%;
+  }
+
+  section {
+    padding: 100px 20px;
+    max-width: 1200px;
+    margin: auto;
+    position: relative;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+
+  section h2 {
+    color: var(--accent);
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    position: relative;
+    display: inline-block;
+    font-weight: 700;
+  }
+
+  section h2::after {
+    content: '';
+    position: absolute;
+    width: 80px;
+    height: 4px;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(90deg, var(--accent), transparent);
+    border-radius: 2px;
+  }
+
+  .section-subtitle {
+    color: var(--text-secondary);
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  #about {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .about-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+    align-items: center;
+  }
+
+  .about-text {
+    flex: 1;
+    min-width: 300px;
+  }
+
+  .about-text p {
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    line-height: 1.8;
+  }
+
+  .stats {
+    display: flex;
+    gap: 30px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+  }
+
+  .stat-item {
+    text-align: center;
+    flex: 1;
+    min-width: 120px;
+  }
+
+  .stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--accent);
+    display: block;
+  }
+
+  .stat-label {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .about-image {
+    flex: 0 0 350px;
+    text-align: center;
+    position: relative;
+  }
+
+  .about-image::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 2px solid var(--accent);
+    border-radius: 15px;
+    top: 20px;
+    left: 20px;
+    z-index: -1;
+    opacity: 0.5;
+  }
+
+  .about-image img {
+    width: 100%;
+    max-width: 350px;
+    border-radius: 15px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    transition: transform 0.5s;
+  }
+
+  .about-image:hover img {
+    transform: translate(-10px, -10px);
+  }
+
+  #expertise {
+    background: var(--bg-card);
+    border-radius: 20px;
+    margin: 50px auto;
+    padding: 80px 40px;
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass);
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+  }
+
+  .skill-category {
+    background: var(--bg-secondary);
+    padding: 30px;
+    border-radius: 15px;
+    transition: all 0.3s;
+    border: 1px solid var(--glass);
+  }
+
+  .skill-category:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px var(--shadow);
+    border-color: var(--accent);
+  }
+
+  .skill-category h3 {
+    color: var(--accent);
+    margin-bottom: 20px;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .skill-category ul {
+    list-style: none;
+  }
+
+  .skill-category li {
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+    padding-left: 20px;
+    position: relative;
+  }
+
+  .skill-category li::before {
+    content: '▹';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+  }
+
+  #projects {
+    position: relative;
+  }
+
+  .projects-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 30px;
+  }
+
+  .repo {
+    background: var(--bg-card);
+    padding: 30px;
+    border-radius: 20px;
+    transition: all 0.3s;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    border: 1px solid var(--glass);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .repo::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(90deg, var(--accent), var(--success));
+  }
+
+  .repo:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 25px 50px var(--shadow);
+  }
+
+  .repo h3 {
+    color: var(--accent);
+    margin-bottom: 15px;
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .repo p {
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+    flex-grow: 1;
+    line-height: 1.7;
+  }
+
+  .repo-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .repo-stats {
+    display: flex;
+    gap: 15px;
+  }
+
+  .repo-stats span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .repo a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s;
+    align-self: flex-start;
+  }
+
+  .repo a:hover {
+    color: var(--accent-hover);
+    gap: 12px;
+  }
+
+  #contact {
+    text-align: center;
+    background: var(--bg-card);
+    border-radius: 20px;
+    margin: 50px auto;
+    padding: 80px 40px;
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass);
+  }
+
+  .contact-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+  }
+
+  .contact-item {
+    background: var(--bg-secondary);
+    padding: 30px 20px;
+    border-radius: 15px;
+    transition: all 0.3s;
+    border: 1px solid var(--glass);
+  }
+
+  .contact-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px var(--shadow);
+    border-color: var(--accent);
+  }
+
+  .contact-item i {
+    font-size: 2.5rem;
+    color: var(--accent);
+    margin-bottom: 20px;
+  }
+
+  .contact-item h3 {
+    color: var(--text-primary);
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+  }
+
+  .contact-item p, .contact-item a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .contact-item a:hover {
+    color: var(--accent);
+  }
+
+  footer {
+    text-align: center;
+    padding: 50px 20px;
+    background: var(--header-bg);
+    color: var(--text-secondary);
+    margin-top: 100px;
+    border-top: 1px solid var(--glass);
+  }
+
+  .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin: 30px 0;
+  }
+
+  .social-links a {
+    color: var(--text-secondary);
+    font-size: 1.8rem;
+    transition: all 0.3s;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-card);
+    border: 1px solid var(--glass);
+  }
+
+  .social-links a:hover {
+    color: var(--accent);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px var(--shadow);
+    border-color: var(--accent);
+  }
+
+  .footer-text {
+    max-width: 600px;
+    margin: 0 auto;
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 768px) {
+    .header-container {
+      flex-direction: column;
+      gap: 20px;
+    }
+    
+    .profile-container {
+      flex-direction: column;
+      text-align: center;
+    }
+    
+    nav {
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+    }
+    
+    .hero h1 {
+      font-size: 2.5rem;
+    }
+    
+    .hero p {
+      font-size: 1.1rem;
+    }
+    
+    .about-content {
+      flex-direction: column;
+    }
+    
+    .about-image {
+      order: -1;
+    }
+    
+    .skills-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .projects-container {
+      grid-template-columns: 1fr;
+    }
+    
+    .contact-container {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .header-text h1 {
+      font-size: 1.5rem;
+    }
+    
+    section h2 {
+      font-size: 2rem;
+    }
+    
+    .hero h1 {
+      font-size: 2rem;
+    }
+    
+    .stats {
+      flex-direction: column;
+      gap: 20px;
+    }
+  }
+
+  /* Animations */
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(5deg); }
+  }
+
+  .loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: var(--accent);
+    animation: spin 1s ease-in-out infinite;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  .fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s, transform 0.6s;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Particle background */
+  .particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+  }
+
+  .particle {
+    position: absolute;
+    background: var(--accent);
+    border-radius: 50%;
+    opacity: 0.3;
+    animation: float 15s infinite linear;
+  }
+
+  /* Security badge */
+  .security-badge {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--bg-card);
+    border: 1px solid var(--glass);
+    border-radius: 10px;
+    padding: 10px 15px;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    z-index: 100;
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s;
+  }
+
+  .security-badge:hover {
+    border-color: var(--accent);
+    transform: scale(1.05);
+  }
+
+  .security-badge i {
+    color: var(--success);
+  }
+
+  /* Terminal effect */
+  .terminal {
+    background: var(--bg-primary);
+    border: 1px solid var(--glass);
+    border-radius: 10px;
+    padding: 20px;
+    font-family: "JetBrains Mono", monospace;
+    margin: 20px 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .terminal::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 30px;
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--glass);
+  }
+
+  .terminal-content {
+    margin-top: 40px;
+    color: var(--success);
+  }
+
+  .terminal-line {
+    margin-bottom: 5px;
+  }
+
+  .terminal-prompt {
+    color: var(--accent);
+  }
+</style>
+</head>
+
+<body>
+  <div class="grid-overlay"></div>
+  <div class="particles" id="particles"></div>
+  
+  <header>
+    <div class="header-container">
+      <div class="profile-container">
+        <img src="profile-pic.jpg" alt="James Hernandez" class="profile-pic">
+        <div class="header-text">
+          <h1>James Hernandez</h1>
+          <p>Cybersecurity Specialist & Ethical Hacker</p>
+        </div>
+      </div>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#expertise">Expertise</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <i class="fas fa-moon"></i>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Protecting Digital Frontiers</h1>
+      <p>Specializing in cybersecurity, penetration testing, and ethical hacking to secure your digital assets against modern threats.</p>
+      <a href="#contact" class="cta-button">Secure Your Systems <i class="fas fa-shield-alt"></i></a>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="section-header">
+      <h2>About Me</h2>
+      <p class="section-subtitle">Dedicated cybersecurity professional with a passion for identifying vulnerabilities and strengthening digital defenses.</p>
+    </div>
+    <div class="about-content">
+      <div class="about-text">
+        <p>
+          Hi! I'm <strong>James Hernandez</strong> — a cybersecurity specialist with extensive experience in penetration testing, vulnerability assessment, and security architecture. My mission is to help organizations protect their digital assets from evolving threats.
+        </p>
+        <p>
+          With over 6 years of experience in the cybersecurity field, I've worked with Fortune 743 companies, government agencies, and startups to identify security gaps and implement robust defense mechanisms.
+        </p>
+        <p>
+          When I'm not fortifying systems, you can find me researching emerging threats, contributing to open-source security tools, or participating in cybersecurity competitions.
+        </p>
+        
+        <div class="stats">
+          <div class="stat-item">
+            <span class="stat-number" data-count="700">0</span>
+            <span class="stat-label">Projects Secured</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number" data-count="350">0</span>
+            <span class="stat-label">Vulnerabilities Found</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number" data-count="98">0</span>
+            <span class="stat-label">Success Rate</span>
+          </div>
+        </div>
+      </div>
+      <div class="about-image">
+        <img src="about-pic.jpg" alt="James Hernandez - Cybersecurity Specialist">
+      </div>
+    </div>
+  </section>
+
+  <section id="expertise">
+    <div class="section-header">
+      <h2>My Expertise</h2>
+      <p class="section-subtitle">Comprehensive cybersecurity skills to protect against modern digital threats</p>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-category">
+        <h3><i class="fas fa-shield-alt"></i> Defense & Protection</h3>
+        <ul>
+          <li>Network Security</li>
+          <li>Endpoint Protection</li>
+          <li>Firewall Configuration</li>
+          <li>Intrusion Detection</li>
+          <li>Security Architecture</li>
+        </ul>
+      </div>
+      <div class="skill-category">
+        <h3><i class="fas fa-search"></i> Assessment & Testing</h3>
+        <ul>
+          <li>Penetration Testing</li>
+          <li>Vulnerability Assessment</li>
+          <li>Security Auditing</li>
+          <li>Risk Analysis</li>
+          <li>Compliance Testing</li>
+        </ul>
+      </div>
+      <div class="skill-category">
+        <h3><i class="fas fa-bug"></i> Threat Intelligence</h3>
+        <ul>
+          <li>Malware Analysis</li>
+          <li>Digital Forensics</li>
+          <li>Incident Response</li>
+          <li>Threat Hunting</li>
+          <li>Security Research</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="section-header">
+      <h2>Security Projects</h2>
+      <p class="section-subtitle">Open-source tools and research to advance cybersecurity knowledge</p>
+    </div>
+    <div class="terminal">
+      <div class="terminal-content">
+       <div class="terminal-line"><span class="terminal-prompt">root@security:~$</span> fetch_security_projects --api=github --user=jah0814</div>
+<div class="terminal-line"><span class="terminal-prompt">root@security:~$</span> Establishing secure connection to repository API...</div>
+      </div>
+    </div>
+    <div class="projects-container" id="repoList">
+      <div class="repo">
+        <h3><i class="fas fa-lock"></i> Security Projects</h3>
+        <p>Fetching my latest cybersecurity tools and research repositories from GitHub...</p>
+        <div class="repo-meta">
+          <div class="repo-stats">
+            <span><i class="fas fa-star"></i> ...</span>
+            <span><i class="fas fa-code-branch"></i> ...</span>
+          </div>
+          <span>Updated: ...</span>
+        </div>
+        <a href="#"><span class="loading"></span> Loading</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="section-header">
+      <h2>Contact Me</h2>
+      <p class="section-subtitle">Ready to secure your systems? Get in touch for a consultation.</p>
+    </div>
+    <div class="contact-container">
+      <div class="contact-item">
+        <i class="fas fa-envelope"></i>
+        <h3>Email</h3>
+        <p><a href="mailto:security@james.dev">security@james.dev</a></p>
+      </div>
+      <div class="contact-item">
+        <i class="fas fa-phone"></i>
+        <h3>Phone</h3>
+        <p><a href="tel:+15551234567">+82 10-8765-1234</a></p>
+      </div>
+      <div class="contact-item">
+        <i class="fas fa-map-marker-alt"></i>
+        <h3>Location</h3>
+        <p>Daejeon, KOR</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="social-links">
+      <a href="https://github.com/jah0814" target="_blank" aria-label="GitHub">
+        <i class="fab fa-github"></i>
+      </a>
+      <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn">
+        <i class="fab fa-linkedin"></i>
+      </a>
+      <a href="https://twitter.com" target="_blank" aria-label="Twitter">
+        <i class="fab fa-twitter"></i>
+      </a>
+      <a href="https://instagram.exchange" target="_blank" aria-label="instagram">
+        <i class="fab fa-instagram"></i>
+      </a>
+    </div>
+    <p class="footer-text">&copy; <span id="year"></span> James Hernandez | Cybersecurity Specialist. All rights reserved. Protecting digital assets since 2019.</p>
+  </footer>
+
+  <div class="security-badge">
+    <i class="fas fa-shield-alt"></i>
+    <span>Security Verified</span>
+  </div>
+
+  <script>
+    const githubUsername = "jah0814";
+
+    // Set footer year dynamically
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Theme toggle functionality
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = themeToggle.querySelector('i');
+    
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('light-mode');
+      
+      if (document.body.classList.contains('light-mode')) {
+        themeIcon.classList.remove('fa-moon');
+        themeIcon.classList.add('fa-sun');
+        document.title = "James Hernandez | Cybersecurity Specialist";
+      } else {
+        themeIcon.classList.remove('fa-sun');
+        themeIcon.classList.add('fa-moon');
+        document.title = "James Hernandez | Cybersecurity Specialist";
+      }
+    });
+
+    // Create particle background
+    function createParticles() {
+      const particlesContainer = document.getElementById('particles');
+      const particleCount = 40;
+      
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        
+        const size = Math.random() * 15 + 5;
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        
+        particle.style.left = `${Math.random() * 100}vw`;
+        particle.style.top = `${Math.random() * 100}vh`;
+        
+        particle.style.animationDuration = `${Math.random() * 20 + 10}s`;
+        particle.style.animationDelay = `${Math.random() * 5}s`;
+        
+        // Random color based on theme
+        const hue = document.body.classList.contains('light-mode') ? 210 : 120;
+        particle.style.backgroundColor = `hsl(${hue}, 100%, 60%)`;
+        
+        particlesContainer.appendChild(particle);
+      }
+    }
+
+    // Animate statistics
+    function animateStats() {
+      const statNumbers = document.querySelectorAll('.stat-number');
+      
+      statNumbers.forEach(stat => {
+        const target = parseInt(stat.getAttribute('data-count'));
+        const duration = 2000;
+        const step = target / (duration / 16);
+        let current = 0;
+        
+        const timer = setInterval(() => {
+          current += step;
+          if (current >= target) {
+            stat.textContent = target + (stat.getAttribute('data-count') === "98" ? "%" : "+");
+            clearInterval(timer);
+          } else {
+            stat.textContent = Math.floor(current) + (stat.getAttribute('data-count') === "98" ? "%" : "+");
+          }
+        }, 16);
+      });
+    }
+
+    // Scroll animation
+    function handleScrollAnimation() {
+      const elements = document.querySelectorAll('.fade-in');
+      
+      elements.forEach(element => {
+        const elementTop = element.getBoundingClientRect().top;
+        const elementVisible = 150;
+        
+        if (elementTop < window.innerHeight - elementVisible) {
+          element.classList.add('visible');
+        }
+      });
+    }
+
+    // Initialize everything
+    document.addEventListener('DOMContentLoaded', () => {
+      createParticles();
+      
+      // Add fade-in class to sections
+      document.querySelectorAll('section').forEach(section => {
+        section.classList.add('fade-in');
+      });
+      
+      // Initial check for elements in view
+      handleScrollAnimation();
+      
+      // Check on scroll
+      window.addEventListener('scroll', handleScrollAnimation);
+      
+      // Animate stats when about section is in view
+      const aboutSection = document.getElementById('about');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            animateStats();
+            observer.unobserve(aboutSection);
+          }
+        });
+      }, { threshold: 0.5 });
+      
+      observer.observe(aboutSection);
+    });
+
+    // Fetch and display GitHub repositories
+    async function loadRepos() {
+      const repoContainer = document.getElementById("repoList");
+      try {
+        const response = await fetch(`https://api.github.com/users/${githubUsername}/repos?sort=updated&direction=desc`);
+        const repos = await response.json();
+        
+        repoContainer.innerHTML = "";
+        
+        if (repos.length === 0) {
+          repoContainer.innerHTML = `
+            <div class="repo">
+              <h3><i class="fas fa-exclamation-triangle"></i> No Repositories Found</h3>
+              <p>No public repositories found for this user. Check back later for security tools and research.</p>
+              <a href="https://github.com/${githubUsername}" target="_blank">Visit GitHub Profile <i class="fas fa-arrow-right"></i></a>
+            </div>
+          `;
+          return;
+        }
+        
+        // Filter for security-related repos or use all if none match
+        const securityRepos = repos.filter(repo => 
+          repo.name.toLowerCase().includes('security') || 
+          repo.name.toLowerCase().includes('hack') ||
+          repo.name.toLowerCase().includes('pentest') ||
+          repo.name.toLowerCase().includes('malware') ||
+          repo.description?.toLowerCase().includes('security')
+        ).slice(0, 6);
+        
+        const displayRepos = securityRepos.length > 0 ? securityRepos : repos.slice(0, 6);
+        
+        displayRepos.forEach(repo => {
+          const div = document.createElement("div");
+          div.classList.add("repo", "fade-in");
+          
+          // Format date
+          const updatedDate = new Date(repo.updated_at).toLocaleDateString();
+          
+          // Security-related icon
+          const securityIcons = ['fa-shield-alt', 'fa-lock', 'fa-bug', 'fa-search', 'fa-user-secret', 'fa-code'];
+          const randomIcon = securityIcons[Math.floor(Math.random() * securityIcons.length)];
+          
+          div.innerHTML = `
+            <h3><i class="fas ${randomIcon}"></i> ${repo.name}</h3>
+            <p>${repo.description ? repo.description : "Security research and tools repository."}</p>
+            <div class="repo-meta">
+              <div class="repo-stats">
+                <span><i class="fas fa-star"></i> ${repo.stargazers_count}</span>
+                <span><i class="fas fa-code-branch"></i> ${repo.forks_count}</span>
+              </div>
+              <span>Updated: ${updatedDate}</span>
+            </div>
+            <a href="${repo.html_url}" target="_blank">View Repository <i class="fas fa-arrow-right"></i></a>
+          `;
+          
+          repoContainer.appendChild(div);
+        });
+        
+        // Trigger animations for newly added elements
+        setTimeout(handleScrollAnimation, 100);
+      } catch (error) {
+        console.error("Error fetching repositories:", error);
+        repoContainer.innerHTML = `
+          <div class="repo">
+            <h3><i class="fas fa-exclamation-triangle"></i> Security Alert</h3>
+            <p>Unable to fetch repositories from GitHub. This might be due to network security restrictions.</p>
+            <a href="https://github.com/${githubUsername}" target="_blank">Visit GitHub Profile <i class="fas fa-arrow-right"></i></a>
+          </div>
+        `;
+      }
+    }
+
+    // Load repositories after page is loaded
+    window.addEventListener('load', loadRepos);
+  </script>
+</body>
+</html>

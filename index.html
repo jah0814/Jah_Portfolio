@@ -35,22 +35,22 @@
   }
 
   .light-mode {
-    --bg-primary: #f8f9fa;
-    --bg-secondary: #e9ecef;
-    --bg-tertiary: #dee2e6;
-    --bg-card: rgba(0, 0, 0, 0.05);
-    --text-primary: #212529;
-    --text-secondary: #495057;
-    --accent: #0077ff;
-    --accent-hover: #0066cc;
-    --accent-glow: rgba(0, 119, 255, 0.4);
-    --danger: #dc3545;
-    --warning: #ffc107;
-    --success: #28a745;
-    --shadow: rgba(0, 119, 255, 0.1);
-    --header-bg: rgba(248, 249, 250, 0.95);
-    --glass: rgba(0, 0, 0, 0.1);
-    --grid-color: rgba(0, 119, 255, 0.05);
+  --bg-primary: #ffffff;
+  --bg-secondary: #f0f9ff;
+  --bg-tertiary: #e1f5fe;
+  --bg-card: rgba(173, 216, 230, 0.1);
+  --text-primary: #1e3a5f;
+  --text-secondary: #4a6572;
+  --accent: #29b6f6;          /* Sky blue accent */
+  --accent-hover: #0288d1;
+  --accent-glow: rgba(41, 182, 246, 0.3);
+  --danger: #ef5350;
+  --warning: #ffb74d;
+  --success: #29b6f6;         /* Changed from green to sky blue */
+  --shadow: rgba(41, 182, 246, 0.1);
+  --header-bg: rgba(255, 255, 255, 0.95);
+  --glass: rgba(173, 216, 230, 0.2);
+  --grid-color: rgba(41, 182, 246, 0.05);
   }
 
   body {
@@ -926,6 +926,7 @@
     border: 1px solid var(--glass);
     position: relative;
     overflow: hidden;
+    cursor: pointer;
   }
 
   .contact-item::before {
@@ -990,6 +991,134 @@
   .contact-item a:hover {
     color: var(--accent);
     text-shadow: 0 5px 15px var(--accent-glow);
+  }
+
+  /* Location Map Modal */
+  .map-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 2000;
+    backdrop-filter: blur(10px);
+    animation: fadeIn 0.3s ease;
+  }
+
+  .map-modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .map-modal-content {
+    background: var(--bg-primary);
+    border-radius: 20px;
+    width: 90%;
+    max-width: 800px;
+    max-height: 90vh;
+    overflow: hidden;
+    border: 1px solid var(--glass);
+    box-shadow: 
+      0 20px 60px rgba(0, 0, 0, 0.5),
+      0 0 50px var(--accent-glow);
+    position: relative;
+    animation: scaleIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  .map-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px;
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--glass);
+  }
+
+  .map-modal-header h3 {
+    color: var(--accent);
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .close-modal {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: var(--transition);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .close-modal:hover {
+    color: var(--danger);
+    background: var(--bg-card);
+    transform: rotate(90deg);
+  }
+
+  .map-container {
+    height: 500px;
+    width: 100%;
+    background: var(--bg-tertiary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Map Iframe Styling */
+  .map-iframe {
+    border: none;
+    filter: grayscale(20%) contrast(110%);
+    transition: filter 0.3s ease;
+    width: 100%;
+    height: 100%;
+  }
+
+  .map-container:hover .map-iframe {
+    filter: grayscale(0%) contrast(100%);
+  }
+
+  .map-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    padding: 20px;
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--glass);
+  }
+
+  .map-action-btn {
+    padding: 12px 25px;
+    border-radius: 25px;
+    border: 1px solid var(--glass);
+    background: var(--bg-card);
+    color: var(--text-secondary);
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+
+  .map-action-btn:hover {
+    background: var(--accent);
+    color: var(--bg-primary);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px var(--shadow);
   }
 
   /* Enhanced Footer */
@@ -1280,6 +1409,23 @@
     }
   }
 
+  /* Map Modal Animations */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes scaleIn {
+    from { 
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    to { 
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
   /* Enhanced Loading Animation */
   .loading {
     display: inline-block;
@@ -1402,6 +1548,19 @@
     .stat-item {
       min-width: 120px;
     }
+    
+    .map-modal-content {
+      width: 95%;
+    }
+    
+    .map-container {
+      height: 400px;
+    }
+    
+    .map-actions {
+      flex-direction: column;
+      gap: 10px;
+    }
   }
 
   @media (max-width: 480px) {
@@ -1430,6 +1589,14 @@
       width: 55px;
       height: 55px;
       font-size: 1.6rem;
+    }
+    
+    .map-modal-header {
+      padding: 15px 20px;
+    }
+    
+    .map-container {
+      height: 300px;
     }
   }
 
@@ -1601,7 +1768,7 @@
     </div>
   </section>
 
-  <section id="contact">
+ <section id="contact">
     <div class="section-header">
       <h2>Contact Me</h2>
       <p class="section-subtitle">Ready to secure your systems? Get in touch for a consultation.</p>
@@ -1610,33 +1777,67 @@
       <div class="contact-item">
         <i class="fas fa-envelope"></i>
         <h3>Email</h3>
-        <p><a href="mailto:security@james.dev">security@james.dev</a></p>
+        <p><a href="mailto:ajamesphz@gmail.com?subject=Cybersecurity Consultation&body=Hello James,%0D%0A%0D%0AI would like to discuss cybersecurity services for my organization.">security@james.dev</a></p>
       </div>
       <div class="contact-item">
         <i class="fas fa-phone"></i>
         <h3>Phone</h3>
-        <p><a href="tel:+15551234567">+82 10-8765-1234</a></p>
+        <p><a href="tel:+6398761234567">+63 (987) 612-34567</a></p>
       </div>
-      <div class="contact-item">
+      <div class="contact-item" id="locationItem">
         <i class="fas fa-map-marker-alt"></i>
         <h3>Location</h3>
-        <p>Daejeon, KOR</p>
+        <p>San Pablo City, PHI</p>
       </div>
     </div>
   </section>
+
+  <!-- Location Map Modal -->
+  <div class="map-modal" id="mapModal">
+    <div class="map-modal-content">
+      <div class="map-modal-header">
+        <h3><i class="fas fa-map-marker-alt"></i> My Location</h3>
+        <button class="close-modal" id="closeModal">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="map-container">
+        <!-- Google Maps Embed for San Pablo City, Laguna -->
+        <iframe 
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d123999.99999999999!2d121.325!3d14.07!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33bd5c3a10b5a36f%3A0xc6fbc32514d5f4b5!2sSan%20Pablo%20City%2C%20Laguna!5e0!3m2!1sen!2sph!4v1690000000000!5m2!1sen!2sph" 
+          width="100%" 
+          height="100%" 
+          style="border:0;" 
+          allowfullscreen="" 
+          loading="lazy" 
+          referrerpolicy="no-referrer-when-downgrade"
+          class="map-iframe">
+        </iframe>
+      </div>
+      <div class="map-actions">
+        <a href="https://www.google.com/maps/dir//San+Pablo+City,+Laguna/@14.07,121.325,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x33bd5c3a10b5a36f:0xc6fbc32514d5f4b5!2m2!1d121.325!2d14.07?entry=ttu" 
+           target="_blank" class="map-action-btn" id="getDirections">
+          <i class="fas fa-directions"></i> Get Directions
+        </a>
+        <button class="map-action-btn" id="copyAddress">
+          <i class="fas fa-copy"></i> Copy Address
+        </button>
+      </div>
+    </div>
+  </div>
 
   <footer>
     <div class="social-links">
       <a href="https://github.com/jah0814" target="_blank" aria-label="GitHub">
         <i class="fab fa-github"></i>
       </a>
-      <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn">
-        <i class="fab fa-linkedin"></i>
+      <a href="https://www.facebook.com/cloudieyo" target="_blank" aria-label="Facebook">
+        <i class="fab fa-facebook"></i>
       </a>
-      <a href="https://twitter.com" target="_blank" aria-label="Twitter">
+      <a href="https://x.com/cloudieyo" target="_blank" aria-label="Twitter">
         <i class="fab fa-twitter"></i>
       </a>
-      <a href="https://instagram.exchange" target="_blank" aria-label="instagram">
+      <a href="https://www.instagram.com/cloudieyo/" target="_blank" aria-label="instagram">
         <i class="fab fa-instagram"></i>
       </a>
     </div>
@@ -1806,6 +2007,75 @@
       }
     `;
     document.head.appendChild(style);
+
+    // Location Map Modal Functionality
+    const locationItem = document.getElementById('locationItem');
+    const mapModal = document.getElementById('mapModal');
+    const closeModal = document.getElementById('closeModal');
+    const getDirections = document.getElementById('getDirections');
+    const copyAddress = document.getElementById('copyAddress');
+
+    // Open modal when location is clicked
+    locationItem.addEventListener('click', () => {
+      mapModal.classList.add('active');
+      document.body.style.overflow = 'hidden'; // Prevent scrolling
+    });
+
+    // Close modal when close button is clicked
+    closeModal.addEventListener('click', () => {
+      mapModal.classList.remove('active');
+      document.body.style.overflow = ''; // Restore scrolling
+    });
+
+    // Close modal when clicking outside the content
+    mapModal.addEventListener('click', (e) => {
+      if (e.target === mapModal) {
+        mapModal.classList.remove('active');
+        document.body.style.overflow = ''; // Restore scrolling
+      }
+    });
+
+    // Close modal with Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && mapModal.classList.contains('active')) {
+        mapModal.classList.remove('active');
+        document.body.style.overflow = ''; // Restore scrolling
+      }
+    });
+
+    // Copy address button functionality
+    copyAddress.addEventListener('click', () => {
+      const address = 'San Pablo City, Laguna, Philippines';
+      navigator.clipboard.writeText(address).then(() => {
+        // Show success feedback
+        const originalText = copyAddress.innerHTML;
+        copyAddress.innerHTML = '<i class="fas fa-check"></i> Copied!';
+        copyAddress.style.background = 'var(--success)';
+        copyAddress.style.color = 'var(--bg-primary)';
+        
+        setTimeout(() => {
+          copyAddress.innerHTML = originalText;
+          copyAddress.style.background = '';
+          copyAddress.style.color = '';
+        }, 2000);
+      }).catch(err => {
+        console.error('Failed to copy address: ', err);
+        // Fallback for older browsers
+        const textArea = document.createElement('textarea');
+        textArea.value = address;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+        
+        // Show feedback even with fallback
+        const originalText = copyAddress.innerHTML;
+        copyAddress.innerHTML = '<i class="fas fa-check"></i> Copied!';
+        setTimeout(() => {
+          copyAddress.innerHTML = originalText;
+        }, 2000);
+      });
+    });
 
     // Initialize Everything
     document.addEventListener('DOMContentLoaded', () => {
